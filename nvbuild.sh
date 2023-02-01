@@ -171,10 +171,14 @@ popd
 #cd jax-source
 
 # Uninstall them in case this script was used before.
+if [ "$EUID" -ne 0 ]; then
+    SUDO=sudo
+fi
+
 if [ "$JAXLIB_ONLY" == "0" ]; then
-    sudo pip uninstall -y jax jaxlib
+    ${SUDO} pip uninstall -y jax jaxlib
 else
-    sudo pip uninstall -y jaxlib
+    ${SUDO} pip uninstall -y jaxlib
 fi
 
 
